@@ -12,14 +12,14 @@ pipeline {
         }
         stage('Build docker image') {
             steps{
-                sh 'docker build -t spanke46/mybot:1 .'
+                sh 'docker build -t spanke46/mybot:2 .'
             }
         }
         stage('Push docker image to DockerHub') {
             steps{
                 withDockerRegistry(credentialsId: 'cred-dockerhub-spanke46', url: 'https://index.docker.io/v1/') {
                     sh '''
-                        docker push spanke46/mybot:1
+                        docker push spanke46/mybot:2
                     '''
                 }
             }

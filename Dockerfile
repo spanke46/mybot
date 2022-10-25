@@ -1,4 +1,4 @@
-FROM python:3.8
+FROM python:latest
 # set work directory
 WORKDIR /usr/src/app/
 # copy project

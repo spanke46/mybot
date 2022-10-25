@@ -26,7 +26,7 @@ pipeline {
         }
         stage('Delete docker image locally') {
             steps{
-                sh 'docker rmi spanke46/mybot:1'
+                sh 'docker rmi spanke46/mybot:2'
                 }
             }
         }

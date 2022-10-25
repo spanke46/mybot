@@ -1,0 +1,33 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout') {
+            steps{
+                git branch: 'master',
+                    url: 'https://github.com/spanke46/mybot.git'
+                sh "pwd"
+                sh "ls -la"
+                }
+        }
+        stage('Build docker image') {
+            steps{
+                sh 'docker build -t spanke46/mybot:1 .'
+            }
+        }
+        stage('Push docker image to DockerHub') {
+            steps{
+                withDockerRegistry(credentialsId: 'cred-dockerhub-spanke46', url: 'https://index.docker.io/v1/') {
+                    sh '''
+                        docker push spanke46/mybot:1
+                    '''
+                }
+            }
+        }
+        stage('Delete docker image locally') {
+            steps{
+                sh 'docker rmi spanke46/mybot:1'
+                }
+            }
+        }
+    }
